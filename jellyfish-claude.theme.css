@@ -1,0 +1,152 @@
+/* ==UserStyle==
+@name         JellyFish for Claude
+@namespace    amsy.jellyfish-claude
+@version      1.0.0
+@description  Claude web reskinned with the JellyFish VS Code theme palette (Pawel Borkar) — deep space navy, neon cyan, hot pink.
+@author       Amsy
+@license      Apache-2.0
+==/UserStyle== */
+
+/* Install: Stylus extension (Chrome/Firefox) → Write new style → paste this →
+   set "Applies to: domain claude.ai" (or keep the @-moz-document block below). */
+
+@-moz-document domain("claude.ai") {
+
+  /* ---------------------------------------------------------
+     1. CORE PALETTE — Claude uses HSL triplets consumed via
+        hsl(var(--x)), so values below are "H S% L%" with no hsl()
+     --------------------------------------------------------- */
+  :root,
+  html,
+  html[data-mode="dark"],
+  .dark {
+    /* Backgrounds — JellyFish ui.bg */
+    --bg-000: 240 100% 9% !important;   /* #00002c  deep      — main chat   */
+    --bg-100: 256 100% 8% !important;   /* #0a0025  darker    — panels      */
+    --bg-200: 267 100% 7% !important;   /* #0f0021  dark      — sidebar     */
+    --bg-300: 241 100% 10% !important;  /* #010033  overlay   — cards       */
+    --bg-400: 296 100% 9% !important;   /* #28002b  widget    — hover       */
+    --bg-500: 296 100% 13% !important;  /* widget lifted      — active      */
+
+    /* Text — JellyFish ui.fg */
+    --text-000: 0 0% 100% !important;   /* #ffffff */
+    --text-100: 180 100% 97% !important;/* #eeffff  variable white          */
+    --text-200: 180 20% 88% !important;
+    --text-300: 0 0% 63% !important;    /* #a1a1a1  subtle                  */
+    --text-400: 0 0% 51% !important;    /* #838383  comment                 */
+    --text-500: 0 0% 42% !important;
+
+    /* Accent — hot pink is the JellyFish signature */
+    --accent-main-000: 330 100% 44% !important;  /* pressed  */
+    --accent-main-100: 330 100% 50% !important;  /* #ff0080  */
+    --accent-main-200: 330 100% 50% !important;
+    --accent-main-900: 330 100% 16% !important;
+
+    /* Secondary — neon cyan */
+    --accent-secondary-000: 180 100% 45% !important;
+    --accent-secondary-100: 180 100% 50% !important; /* #00ffff */
+    --accent-secondary-200: 191 100% 50% !important; /* #00d9ff link */
+    --accent-secondary-900: 191 100% 14% !important;
+
+    --accent-pro-000: 277 68% 60% !important;
+    --accent-pro-100: 277 68% 75% !important;    /* #C792EA purple */
+    --accent-pro-200: 277 68% 75% !important;
+    --accent-pro-900: 277 68% 18% !important;
+
+    /* Borders — dim indigo so neon accents stay the stars */
+    --border-100: 244 60% 30% !important;
+    --border-200: 244 60% 24% !important;
+    --border-300: 244 60% 18% !important;
+    --border-400: 244 60% 14% !important;
+
+    --oncolor-100: 240 100% 9% !important; /* text on pink/cyan buttons */
+
+    --danger-000: 349 100% 60% !important; /* #FF5370 */
+    --danger-100: 349 100% 66% !important;
+    --danger-900: 349 100% 15% !important;
+  }
+
+  /* ---------------------------------------------------------
+     2. DETAILS — cursor, selection, scrollbar, code, glow
+     --------------------------------------------------------- */
+
+  /* Text selection: JellyFish pink @ ~36% */
+  ::selection {
+    background: rgba(255, 0, 136, 0.36) !important;
+    color: #ffffff !important;
+  }
+
+  /* Cursor in the prompt box: cyan, like the editor caret */
+  textarea,
+  [contenteditable="true"],
+  .ProseMirror {
+    caret-color: #00f7ff !important;
+  }
+
+  /* Links: cyanLink */
+  a:not([class*="button"]) {
+    color: #00d9ff !important;
+  }
+
+  /* Scrollbars */
+  * {
+    scrollbar-color: #ff008055 #0a0025 !important;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0a0025 !important; }
+  ::-webkit-scrollbar-thumb {
+    background: #ff008055 !important;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #ff0080aa !important; }
+
+  /* Inline code: string-yellow on widget plum — prose only, no border */
+  p code,
+  li code,
+  td code,
+  h1 code, h2 code, h3 code {
+    color: #eeff00 !important;
+    background: #28002b !important;
+    border: none !important;
+    border-radius: 4px;
+  }
+
+  /* Hard reset: nothing inside code blocks or editors ever gets a box */
+  pre code,
+  pre code *,
+  pre span,
+  [class*="cm-"],
+  [class*="token"],
+  [class*="hljs"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Code blocks: deep terminal navy with a faint cyan edge */
+  pre,
+  pre > div,
+  .code-block__code {
+    background: #00001f !important;
+    border-color: #00ffff22 !important;
+  }
+
+  /* Send button + primary actions: pink with a soft neon glow */
+  button[aria-label*="Send" i],
+  button[type="submit"] {
+    box-shadow: 0 0 14px rgba(255, 0, 128, 0.45) !important;
+  }
+
+  /* Prompt input container: cyan focus ring instead of default */
+  [class*="composer"]:focus-within,
+  fieldset:focus-within,
+  form:focus-within [contenteditable="true"] {
+    outline-color: #00f7ff !important;
+  }
+
+  /* Claude's thinking/loading shimmer tinted cyan */
+  [class*="shimmer"],
+  [class*="loading"] {
+    filter: hue-rotate(140deg) saturate(1.4);
+  }
+}
