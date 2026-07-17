@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JellyFish Usage Bar for Claude
 // @namespace    amsy.jellyfish-claude
-// @version      1.0.1
+// @version      1.1.0
 // @description  Real-time session + weekly usage bars on claude.ai, styled to match the JellyFish theme. No more digging through Settings.
 // @author       Amsy
 // @match        https://claude.ai/*
@@ -37,7 +37,7 @@
     #jf-usage.jf-collapsed .jf-body { display: none; }
     #jf-usage .jf-head {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 10px; cursor: pointer; margin-bottom: 6px;
+      gap: 10px; cursor: grab; margin-bottom: 6px;
     }
     #jf-usage.jf-collapsed .jf-head { margin-bottom: 0; }
     #jf-usage .jf-title { color: #00ffff; font-weight: 600; text-transform: uppercase; font-size: 10px; }
@@ -79,11 +79,85 @@
   `;
   document.documentElement.appendChild(box);
 
+  /* ---------------- draggable ---------------- */
+  const POS_KEY = "jf-usage-pos";
+
+  function clampPos(x, y) {
+    const r = box.getBoundingClientRect();
+    return {
+      x: Math.min(Math.max(0, x), window.innerWidth - r.width),
+      y: Math.min(Math.max(0, y), window.innerHeight - r.height),
+    };
+  }
+
+  function applyPos(x, y) {
+    box.style.left = x + "px";
+    box.style.top = y + "px";
+    box.style.right = "auto";
+    box.style.bottom = "auto";
+  }
+
+  // restore saved position
+  try {
+    const saved = JSON.parse(localStorage.getItem(POS_KEY));
+    if (saved && typeof saved.x === "number") {
+      const p = clampPos(saved.x, saved.y);
+      applyPos(p.x, p.y);
+    }
+  } catch (_) {}
+
+  let dragging = false, wasDragged = false, offX = 0, offY = 0;
+
+  box.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    if (e.target.classList.contains("jf-refresh")) return;
+    const r = box.getBoundingClientRect();
+    offX = e.clientX - r.left;
+    offY = e.clientY - r.top;
+    dragging = true;
+    wasDragged = false;
+    box.setPointerCapture(e.pointerId);
+  });
+
+  box.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const nx = e.clientX - offX;
+    const ny = e.clientY - offY;
+    // only count as a drag after a few px of movement (keeps click-to-collapse working)
+    if (!wasDragged) {
+      const r = box.getBoundingClientRect();
+      if (Math.abs(nx - r.left) < 4 && Math.abs(ny - r.top) < 4) return;
+      wasDragged = true;
+      box.style.cursor = "grabbing";
+    }
+    const p = clampPos(nx, ny);
+    applyPos(p.x, p.y);
+  });
+
+  box.addEventListener("pointerup", (e) => {
+    if (!dragging) return;
+    dragging = false;
+    box.style.cursor = "";
+    if (wasDragged) {
+      const r = box.getBoundingClientRect();
+      try { localStorage.setItem(POS_KEY, JSON.stringify({ x: r.left, y: r.top })); } catch (_) {}
+    }
+    box.releasePointerCapture(e.pointerId);
+  });
+
+  // keep it on screen if the window shrinks
+  window.addEventListener("resize", () => {
+    const r = box.getBoundingClientRect();
+    const p = clampPos(r.left, r.top);
+    applyPos(p.x, p.y);
+  }, { passive: true });
+
   const body = box.querySelector(".jf-body");
   const mini = box.querySelector(".jf-mini");
 
   box.querySelector(".jf-head").addEventListener("click", (e) => {
     if (e.target.classList.contains("jf-refresh")) return;
+    if (wasDragged) return; // it was a drag, not a click
     box.classList.toggle("jf-collapsed");
   });
   box.querySelector(".jf-refresh").addEventListener("click", (e) => {
