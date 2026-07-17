@@ -97,4 +97,4 @@ Apache-2.0 — same as the original JellyFish palette. See [LICENSE](LICENSE).
 
 ---
 
-*Not affiliated with Anthropic or WhatsApp. Personal cosmetic modifications for your own browser.*
+*Not affiliated with Anthropic. Personal cosmetic modifications for your own browser.*
