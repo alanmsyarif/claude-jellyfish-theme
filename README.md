@@ -17,7 +17,7 @@ Claude web ([claude.ai](https://claude.ai)) reskinned with the [JellyFish VS Cod
 
 Everything is standalone - install only what you want. The theme works without the scripts, the scripts work without the theme.
 
-![description](./images/cymage.png)
+![description](./image_2026-07-17_164406195.png)
 
 ## Requirements
 
