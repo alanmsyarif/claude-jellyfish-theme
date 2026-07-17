@@ -1,6 +1,6 @@
 # 🪼 JellyFish Theme for Claude
 
-Claude web ([claude.ai](https://claude.ai)) reskinned with the [JellyFish VS Code theme](https://github.com/PawelBorkar/jellyfish) palette by Pawel Borkar — deep space navy, neon cyan, and hot pink. Plus optional interactive extras: an animated plexus background, a draggable real-time usage bar, and a full **Galaxy** variant.
+Claude web ([claude.ai](https://claude.ai)) reskinned with the [JellyFish VS Code theme](https://github.com/PawelBorkar/jellyfish) palette by Pawel Borkar / deep space navy, neon cyan, and hot pink. Plus optional interactive extras: an animated plexus background, a draggable real-time usage bar, and a full **Galaxy** variant.
 
 <!-- Add a screenshot: docs/preview.png -->
 <!-- ![Preview](docs/preview.png) -->
@@ -15,11 +15,11 @@ Claude web ([claude.ai](https://claude.ai)) reskinned with the [JellyFish VS Cod
 | `galaxy-claude.user.css` | Userstyle (Stylus) | **Galaxy variant** — void indigo, nebula violet, magenta, starlight cyan |
 | `galaxy-background.user.js` | Userscript | **Galaxy background** — 3-layer parallax starfield with twinkle, drifting nebulae, and shooting stars |
 
-Everything is standalone — install only what you want. The theme works without the scripts, the scripts work without the theme.
+Everything is standalone - install only what you want. The theme works without the scripts, the scripts work without the theme.
 
 ## Requirements
 
-- **[Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne)** — for the `.css` themes
+- **[Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne)** for the `.css` themes
 - **[Violentmonkey](https://violentmonkey.github.io/)** (recommended) or Tampermonkey — for the `.user.js` scripts
 - Claude in **dark mode**
 
