@@ -9,11 +9,11 @@ Claude web ([claude.ai](https://claude.ai)) reskinned with the [JellyFish VS Cod
 
 | File | Type | What it does |
 |------|------|--------------|
-| `jellyfish-claude.theme.css` | Userstyle (Stylus) | The main theme — recolors the entire Claude UI via CSS variable overrides, including full JellyFish syntax highlighting for code blocks |
-| `jellyfish-plexus.user.js` | Userscript | Interactive plexus particle network — cyan/pink glowing nodes that connect to each other and follow your cursor |
+| `jellyfish-claude.theme.css` | Userstyle (Stylus) | The main theme recolors the entire Claude UI via CSS variable overrides, including full JellyFish syntax highlighting for code blocks |
+| `jellyfish-plexus.user.js` | Userscript | Interactive plexus particle network cyan/pink glowing nodes that connect to each other and follow your cursor |
 | `jellyfish-usage-bar.user.js` | Userscript | Draggable, real-time session + weekly usage meter so you never have to open Settings → Usage. Color-shifts at 70% / 90% |
-| `galaxy-claude.user.css` | Userstyle (Stylus) | **Galaxy variant** — void indigo, nebula violet, magenta, starlight cyan |
-| `galaxy-background.user.js` | Userscript | **Galaxy background** — 3-layer parallax starfield with twinkle, drifting nebulae, and shooting stars |
+| `galaxy-claude.user.css` | Userstyle (Stylus) | **Galaxy variant** void indigo, nebula violet, magenta, starlight cyan |
+| `galaxy-background.user.js` | Userscript | **Galaxy background** 3-layer parallax starfield with twinkle, drifting nebulae, and shooting stars |
 
 Everything is standalone - install only what you want. The theme works without the scripts, the scripts work without the theme.
 
@@ -22,10 +22,10 @@ Everything is standalone - install only what you want. The theme works without t
 ## Requirements
 
 - **[Stylus](https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne)** for the `.css` themes
-- **[Violentmonkey](https://violentmonkey.github.io/)** (recommended) or Tampermonkey — for the `.user.js` scripts
+- **[Violentmonkey](https://violentmonkey.github.io/)** (recommended) or Tampermonkey for the `.user.js` scripts
 - Claude in **dark mode**
 
-> ⚠️ **Opera users:** Tampermonkey's userscript injection is often blocked even with Developer Mode on. Use **Violentmonkey** instead — it works out of the box.
+> ⚠️ **Opera users:** Tampermonkey's userscript injection is often blocked even with Developer Mode on. Use **Violentmonkey** instead it works out of the box.
 
 ## Install
 
@@ -36,7 +36,7 @@ Everything is standalone - install only what you want. The theme works without t
 3. Paste the contents of `jellyfish-claude.theme.css` **or** `galaxy-claude.user.css`
 4. Set *Applies to* → **domain** → `claude.ai`, save
 
-Don't enable both at once — they override the same variables.
+Don't enable both at once they override the same variables.
 
 ### 2. Background animation (optional)
 
@@ -51,7 +51,7 @@ The galaxy script automatically removes the plexus canvas if both are installed.
 Same as above, with `jellyfish-usage-bar.user.js`. A ◉ USAGE widget appears bottom-left:
 
 - Session (5h) and weekly bars with reset countdown
-- **Drag it anywhere** — position is remembered
+- **Drag it anywhere** position is remembered
 - Click the header to collapse to a tiny percentage pill, `⟳` to refresh manually
 - Auto-refreshes every 5 min and shortly after each message you send
 
