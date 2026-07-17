@@ -1,0 +1,151 @@
+/* ==UserStyle==
+@name         Galaxy for Claude
+@namespace    amsy.galaxy-claude
+@version      1.0.0
+@description  Claude web in deep-space galaxy colors — void indigo, nebula violet, magenta, starlight cyan and gold. Pair with the Galaxy Background userscript.
+@author       Amsy
+@license      Apache-2.0
+==/UserStyle== */
+
+/* Install: Stylus → Write new style → paste → Applies to: domain claude.ai
+   Disable "JellyFish for Claude" while this one is on (they override the same vars). */
+
+@-moz-document domain("claude.ai") {
+
+  /* ---------------------------------------------------------
+     1. CORE PALETTE — HSL triplets ("H S% L%"), no hsl() wrapper
+     --------------------------------------------------------- */
+  :root,
+  html,
+  html[data-mode="dark"],
+  .dark {
+    /* Backgrounds — the void */
+    --bg-000: 255 100% 4% !important;   /* #050014  deep space — main chat  */
+    --bg-100: 256 94% 7% !important;    /* #0a0122  panels                  */
+    --bg-200: 257 100% 5% !important;   /* #070018  sidebar                 */
+    --bg-300: 257 90% 12% !important;   /* #120338  cards                   */
+    --bg-400: 259 77% 17% !important;   /* #1b0a4a  hover                   */
+    --bg-500: 259 70% 22% !important;   /* active                           */
+
+    /* Text — starlight */
+    --text-000: 0 0% 100% !important;
+    --text-100: 240 60% 97% !important; /* faint blue-white                 */
+    --text-200: 240 30% 88% !important;
+    --text-300: 245 15% 65% !important;
+    --text-400: 245 12% 52% !important;
+    --text-500: 245 10% 42% !important;
+
+    /* Accent — nebula violet */
+    --accent-main-000: 271 68% 50% !important;
+    --accent-main-100: 271 68% 59% !important;  /* #9d4edd */
+    --accent-main-200: 271 68% 65% !important;
+    --accent-main-900: 271 68% 16% !important;
+
+    /* Secondary — starlight cyan */
+    --accent-secondary-000: 191 89% 62% !important;
+    --accent-secondary-100: 191 89% 74% !important; /* #8be9fd */
+    --accent-secondary-200: 191 89% 74% !important;
+    --accent-secondary-900: 191 89% 14% !important;
+
+    /* Pro — magenta nova */
+    --accent-pro-000: 317 100% 50% !important;
+    --accent-pro-100: 317 100% 59% !important;  /* #ff2ec4 */
+    --accent-pro-200: 317 100% 66% !important;
+    --accent-pro-900: 317 100% 16% !important;
+
+    /* Borders — faint indigo dust */
+    --border-100: 258 55% 32% !important;
+    --border-200: 258 55% 25% !important;
+    --border-300: 258 55% 18% !important;
+    --border-400: 258 55% 13% !important;
+
+    --oncolor-100: 255 100% 4% !important;
+
+    --danger-000: 349 100% 60% !important;
+    --danger-100: 349 100% 66% !important;
+    --danger-900: 349 100% 15% !important;
+  }
+
+  /* ---------------------------------------------------------
+     2. DETAILS
+     --------------------------------------------------------- */
+
+  ::selection { background: rgba(157, 78, 221, 0.4) !important; color: #fff !important; }
+
+  textarea,
+  [contenteditable="true"],
+  .ProseMirror { caret-color: #8be9fd !important; }
+
+  a:not([class*="button"]) { color: #8be9fd !important; }
+
+  * { scrollbar-color: #9d4edd66 #0a0122 !important; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0a0122 !important; }
+  ::-webkit-scrollbar-thumb { background: #9d4edd66 !important; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #9d4eddbb !important; }
+
+  /* Inline code: star-gold on nebula indigo — prose only */
+  p code, li code, td code,
+  h1 code, h2 code, h3 code {
+    color: #ffd166 !important;
+    background: #1b0a4a !important;
+    border: none !important;
+    border-radius: 4px;
+  }
+
+  /* Hard reset inside code blocks / editors */
+  pre code, pre code *, pre span,
+  [class*="cm-"], [class*="token"], [class*="hljs"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ---------------------------------------------------------
+     3. SYNTAX HIGHLIGHTING — galaxy palette
+     --------------------------------------------------------- */
+  pre code, pre span { color: #e6e6fa; }
+
+  .hljs-comment, .token.comment, .cm-comment, .hljs-quote {
+    color: #6a6a8a !important; font-style: italic;
+  }
+  .hljs-keyword, .token.keyword, .cm-keyword,
+  .hljs-selector-tag, .token.selector, .hljs-doctag, .token.doctype {
+    color: #c77dff !important;               /* nebula violet */
+  }
+  .hljs-tag, .token.tag, .cm-tag, .hljs-name {
+    color: #ff2ec4 !important;               /* magenta nova */
+  }
+  .hljs-string, .token.string, .cm-string, .hljs-template-string, .token.char {
+    color: #ffd166 !important;               /* star gold */
+  }
+  .hljs-number, .token.number, .cm-number,
+  .hljs-literal, .token.boolean, .token.constant, .hljs-params, .cm-atom {
+    color: #ff8fab !important;               /* rose dust */
+  }
+  .hljs-title, .hljs-title.function_, .token.function, .cm-def, .cm-variable-2 {
+    color: #8be9fd !important;               /* starlight cyan */
+  }
+  .hljs-attr, .hljs-attribute, .token.attr-name,
+  .cm-attribute, .token.property, .cm-property {
+    color: #7df9d9 !important;               /* aurora mint */
+  }
+  .token.attr-value { color: #ffd166 !important; }
+  .hljs-title.class_, .token.class-name, .cm-type,
+  .hljs-type, .hljs-built_in, .token.builtin {
+    color: #b8c0ff !important;               /* pale star blue */
+  }
+  .hljs-variable, .token.variable, .cm-variable { color: #e6e6fa !important; }
+  .hljs-operator, .token.operator, .cm-operator,
+  .token.punctuation, .hljs-punctuation { color: #ffffff !important; }
+  .hljs-regexp, .token.regex, .hljs-subst, .token.entity { color: #90e0ef !important; }
+  .hljs-meta, .token.important, .hljs-symbol, .token.atrule, .cm-qualifier {
+    color: #ff2ec4 !important;
+  }
+
+  /* Send button: violet nova glow */
+  button[aria-label*="Send" i],
+  button[type="submit"] {
+    box-shadow: 0 0 14px rgba(157, 78, 221, 0.55) !important;
+  }
+}
